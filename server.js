@@ -20,7 +20,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true })) // body parser - parses req.body
 app.use(methodOverride)// must be called after urlencoded
 app.use(session({
-    secret: 'process.env.SESSION_SECRET || mistyrose',
+    secret: process.env.SESSION_SECRET || 'mistyrose',
     resave: false,
     saveUninitialized: true,
 }))
