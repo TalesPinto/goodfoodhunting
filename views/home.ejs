@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <% if (isLoggedIn())  { %>
+            <form action="/sessions" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button>logout</button>
+            </form>
+            <p>logged in as <%= currentUser.email %></p>
+            <%} else { %>
+                <form action="/login">
+                    <button>login</button>
+                </form>
+        <% } %>
+
+        <div><%= email %></div>
+        <h1>goodfoodhunting</h1>
+        <nav>
+
+            <a href="/dishes/new">share a dish</a>
+        </nav>
+    </header>
+
+    <%= currentUser.name %>
+
+    <div id="gutters">
+        <div id="content-wrapper">
+            <h2>Latest in map area</h2>
+            <div id="grid">
+        <% for (let dish of dishes) { %>
+            <a href="/dishes/<%= dish.id %>" class="card">
+                <img src="<%= dish.imagem_url %>" alt="">
+                <div class="info-wrapper">
+                    <h3><%= dish.title %></h3>
+                    <h4>DT's grill</h4>
+                    <footer>
+                        <span>10 minutes</span>
+                        <span>Sydney</span>
+                    </footer>
+                </div>
+                <!-- <a href="/dish_details/"><span class="link"></span></a> -->
+            </a>
+        <% } %>  
+            </div>      
+        </div>
+    </div>    
+</body>
+</html>
