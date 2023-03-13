@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
     <header>
         <% if (isLoggedIn())  { %>
             <form action="/sessions" method="post">
@@ -24,14 +14,13 @@
         <div><%= email %></div>
         <h1>goodfoodhunting</h1>
         <nav>
-
+            <a href="/sign_up">Sign Up</a>
             <a href="/dishes/new">share a dish</a>
         </nav>
     </header>
 
     <%= currentUser.name %>
 
-    <div id="gutters">
         <div id="content-wrapper">
             <h2>Latest in map area</h2>
             <div id="grid">
@@ -51,6 +40,4 @@
         <% } %>  
             </div>      
         </div>
-    </div>    
-</body>
-</html>
+

@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <% if () { %>
-        <form action="/sessions" method="post">
+    <% if (isLoggedIn()) { %>
+            <form action="/sessions" method="post">
             <input type="hidden" name="_method" value="delete">
             <button>logout</button>
         </form>
-
-
+        <p>logged in as <%= currentUser.email %></p>
+        <%} else { %>
+            <form action="/login">
+                <button>login</button>
+            </form>
     <% } %>
+    <%- body %>
 </body>
 </html>

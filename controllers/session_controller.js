@@ -5,7 +5,30 @@ const db = require('./../db')
 
 router.get('/login', (req, res) => {
     res.render('login')
-}) // session
+})
+
+router.get('/sign_up', (req, res) => {
+    res.render('new_user')
+})
+
+router.post('/sessions/new_user', (req, res) => {
+
+    const email = req.body.email
+    const plainTextPassword = req.body.password
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(plainTextPassword, salt, (err, digestedPassword) => {
+            // // the digested password is what we want to save in db
+            // console.log(digestedPassword);
+            const sql = `INSERT INTO users (email, password_digest) VALUES('${email}', '${digestedPassword}');`
+
+            db.query(sql, (err, dbRes) => {
+                console.log(err)
+                res.redirect('/login')
+            })
+        })
+    })
+
+})
 
 router.post('/sessions', (req, res) => {
     console.log(req.session)
@@ -21,7 +44,7 @@ router.post('/sessions', (req, res) => {
 
         if (dbRes.rows.length === 0) {
             // no good, user doesnt exist in the users table, stay at login page
-            res.render('login')
+            res.render('new_user')
             return
         }
 
@@ -40,6 +63,7 @@ router.post('/sessions', (req, res) => {
 
     })
 })
+
 
 router.delete('/sessions', (req, res) => {
     req.session.destroy(() => {
